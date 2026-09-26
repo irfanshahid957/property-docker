@@ -14,4 +14,9 @@ RUN curl -sL https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-stat
 
 RUN python3 -c "from huggingface_hub import snapshot_download; snapshot_download('openai/clip-vit-large-patch14')"
 
+RUN --mount=type=secret,id=HF_TOKEN \
+    HF_TOKEN=$(cat /run/secrets/HF_TOKEN) \
+    python3 -c "import os; from transformers import pipeline; pipeline('image-classification', model='irfanshahid957/real-estate-classifier', token=os.environ['HF_TOKEN'])" && \
+    find /root/.cache/huggingface -name "*.lock" -delete
+
 WORKDIR /workspace
