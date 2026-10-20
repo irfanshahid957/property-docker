@@ -8,8 +8,8 @@ RUN apt-get update -qq && \
     apt-get install -y -qq python3 python3-pip curl fonts-dejavu-core ffmpeg xz-utils unzip > /dev/null 2>&1 && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Python packages
-RUN pip install --no-cache-dir -q Pillow requests assemblyai yt-dlp yt-dlp-ejs --break-system-packages
+# Python packages (pip3 install without --break-system-packages for Ubuntu 22.04 / Python 3.10)
+RUN pip3 install --no-cache-dir -q Pillow requests assemblyai yt-dlp yt-dlp-ejs
 
 # Deno runtime (required for yt-dlp-ejs, node is unsupported)
 RUN curl -fsSL https://deno.land/install.sh | sh && \
