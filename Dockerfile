@@ -9,7 +9,7 @@ RUN apt-get update -qq && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Python packages (pip3 install without --break-system-packages for Ubuntu 22.04 / Python 3.10)
-RUN pip3 install --no-cache-dir -q Pillow requests assemblyai yt-dlp yt-dlp-ejs
+RUN pip3 install --no-cache-dir -q Pillow requests assemblyai yt-dlp yt-dlp-ejs ddgs
 
 # Deno runtime (required for yt-dlp-ejs, node is unsupported)
 RUN curl -fsSL https://deno.land/install.sh | sh && \
